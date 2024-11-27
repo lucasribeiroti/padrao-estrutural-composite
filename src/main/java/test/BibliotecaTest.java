@@ -11,6 +11,7 @@ class BibliotecaTest {
 
     @Test
     void deveRetornarConteudoBiblioteca() {
+        // Criando seções e adicionando livros
         Secao secao1 = new Secao("Tecnologia");
 
         Secao secao2 = new Secao("Literatura Clássica");
@@ -23,14 +24,17 @@ class BibliotecaTest {
         secao3.addConteudo(livro31);
         secao3.addConteudo(livro32);
 
+        // Criando uma biblioteca principal com as seções
         Secao bibliotecaConteudo = new Secao("Biblioteca Municipal");
         bibliotecaConteudo.addConteudo(secao1);
         bibliotecaConteudo.addConteudo(secao2);
         bibliotecaConteudo.addConteudo(secao3);
 
+        // Adicionando a seção de conteúdos à Biblioteca
         Biblioteca biblioteca = new Biblioteca("Biblioteca Central");
         biblioteca.addConteudo(bibliotecaConteudo);
 
+        // Verificando se o conteúdo gerado é o esperado
         assertEquals("Biblioteca: Biblioteca Central\n" +
                 "Seção: Biblioteca Municipal\n" +
                 "Seção: Tecnologia\n" +
@@ -44,11 +48,13 @@ class BibliotecaTest {
     @Test
     void deveRetornarExcecaoBibliotecaSemConteudo() {
         try {
+            // Criando uma biblioteca sem conteúdo
             Biblioteca biblioteca = new Biblioteca("Biblioteca Vazia");
-            biblioteca.getConteudo();
-            fail();
+            biblioteca.getConteudo(); // Tentando obter o conteúdo (deve falhar)
+            fail(); // Se não lançar exceção, o teste falha
         }
         catch (Exception e) {
+            // Verifica se a exceção lançada é do tipo esperado
             assertTrue(e instanceof NullPointerException || e instanceof IllegalStateException);
         }
     }
